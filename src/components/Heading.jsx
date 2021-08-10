@@ -1,22 +1,32 @@
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
+import ThemeContext from '../contexts/ThemeContext';
 
 export default function Heading() {
     const { user } = useContext(UserContext);
+    const {theme, setTheme} = useContext(ThemeContext)
 
     return (
         <div className="heading">
             <p>
                 Welcome, {user.name}, &nbsp;
-                <a href="#" onClick={() => { setUser(null) }}>Log out</a>
+                <a
+                    href="#"
+                    onClick={() => {
+                        setUser(null);
+                    }}
+                >
+                    Log out
+                </a>
             </p>
-            <hr/>
+            <hr />
             <p>Switch theme</p>
-            <select>
-                <option value="light">Light blue</option>
-                <option value="dark">Dark green</option>
+            {theme};
+            <select onChange={(e) => {setTheme(e.target.value)}}>
+                <option value = "lightBlue">Light blue</option>
+                <option value="green">Dark green</option>
             </select>
-            <hr/>
+            <hr />
         </div>
     );
 }
